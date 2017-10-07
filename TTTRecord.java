@@ -19,8 +19,5 @@ public class TTTRecord{
     public int getLevel(){
         return level;
     }
-    public void anotherone(){
-        System.out.println("Another one");
-    }
 }
 
