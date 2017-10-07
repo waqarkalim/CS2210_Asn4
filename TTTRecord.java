@@ -1,5 +1,5 @@
 public class TTTRecord{
-    
+
     private String config;
     private int score;
     private int level;
@@ -18,9 +18,6 @@ public class TTTRecord{
     }
     public int getLevel(){
         return level;
-    }
-    public void anotherone(){
-        System.out.println("Another one");
     }
 }
 
