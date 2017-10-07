@@ -18,8 +18,5 @@ public class TTTRecord{
     public int getLevel(){
         return level;
     }
-    public String HelloWorld(){
-        return "Hello World";
-    }
 }
 
