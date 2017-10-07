@@ -1,9 +1,14 @@
 public class BlockedTicTacToe{
-    public BlockedTicTacToe(int board_size, int inline, int max_levels){
 
+    
+    public BlockedTicTacToe(int board_size, int inline, int max_levels){
+        
+        private char [][] gameBoard;
+        
     }
     public TTTDictionary createDictionary(){
-
+        TTTDictionary dict = new TTTDictionary;
+        
     }
     public int repeatedConfig(TTTDictionary configuartions){
 
