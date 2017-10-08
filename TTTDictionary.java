@@ -1,19 +1,14 @@
 import java.util.ArrayList;
 
 public class TTTDictionary{
-
-    private ArrayList<HashNode<K,V>> NodeArray;
-    private int capacity;
-    private int size;
-
-    public TTTDictionary(){
-        NodeArray = new ArrayList<>();
-        capacity = 10;
-        size = 5;
-
-        for (int i = 0; i < capacity; i++){
-            NodeArray.add(null);
-        }
+    
+    private LinkedList<HashNode>[] Hashtable;
+    private HashNode[] nodeArray;
+        
+    public TTTDictionary(int size){
+        
+        // nodeArray = new HashNode[size];
+    
     }
 
     public int put(TTTRecord record) throws DuplicatedKeyException{

@@ -9,10 +9,10 @@ public class HashNode<K,V>{
         key = null;
         value = null;
     }
-    public HashNode(K key, V value){
+    public HashNode(K keyindex, V element){
         next = null;
-        this.key = key;
-        this.value = value;
+        key = keyindex;
+        value = element;
     }
     public HashNode<K,V> getNext(){
         return next;
@@ -23,6 +23,9 @@ public class HashNode<K,V>{
     }
     public K getKey(){
         return key;
+    }
+    public void setKey(K index){
+        key = index;
     }
     public V getvalue(){
         return value;
