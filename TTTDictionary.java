@@ -1,6 +1,9 @@
-import com.sun.prism.impl.Disposer.Record;
 
-public class TTTDictionary{
+/**
+ * @author Waqar Kalim
+ *
+ */
+public class TTTDictionary {
 	private LinearNode<TTTRecord> head = null;
 	private LinearNode<TTTRecord> current;
 	private LinearNode<TTTRecord> Hashnode;
@@ -9,138 +12,172 @@ public class TTTDictionary{
 	private int numElements;
 	private int index;
 	private String[] configArray;
-	
-	public TTTDictionary(int size){
-		
+
+	// The TTTDictionary() method is the constructor that takes size as an input
+	// and creates the hashtable of that size
+	/**
+	 * @param size
+	 */
+	public TTTDictionary(int size) {
+
 		Hashnode = new LinearNode<TTTRecord>();
 		hashtable = new LinkedList[size];
 		configArray = new String[size];
-		for (int i = 0; i < hashtable.length; i++){
+		for (int i = 0; i < hashtable.length; i++) {
 			list = new LinkedList();
 			hashtable[i] = list;
 		}
 		numElements = 0;
-		
+
 	}
-	
-	private boolean searchArray(String element, String[] array){
+
+	// The addConfig() takes a configuration as an input and add that
+	// configuration into configArray for storage
+	/**
+	 * @param config
+	 */
+	private void addConfig(String config) {
+		configArray[numElements] = config;
+		numElements++;
+
+		if (numElements == configArray.length) {
+			expandCapacity();
+		}
+	}
+
+	// The expandCapacity() method increases the size of configArray if it gets
+	// filled
+	/**
+	 * 
+	 */
+	private void expandCapacity() {
+		String[] largerList = new String[configArray.length * 2];
+		for (int i = 0; i < configArray.length; i++)
+			largerList[i] = configArray[i];
+
+		configArray = largerList;
+	}
+
+	// The searchArray() takes a configuration and a configArray as inputs and
+	// checks to see if that configuration is in
+	// configArray
+	/**
+	 * @param element
+	 * @param array
+	 * @return
+	 */
+	private boolean searchArray(String element, String[] array) {
 		for (int i = 0; i < array.length; i++) {
-			if (array[i] == element){
+			if (array[i] == element) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	private int hashfunction(String config){
+
+	// The hashfunction() method takes the configuration as an input and
+	// converts it into a hashvalue using a polynomial
+	// hash function and returns that value
+	/**
+	 * @param config
+	 * @return
+	 */
+	private int hashfunction(String config) {
 		int hash = config.charAt(0);
-		for (int i = 0; i < config.length(); i++){
-			hash = (hash*47 + config.charAt(i)) % hashtable.length;
-			
+		for (int i = 0; i < config.length(); i++) {
+			hash = (hash * 479 + config.charAt(i)) % hashtable.length;
 		}
-		return (hash % hashtable.length);
+		return (hash);
 	}
-	
-	//This is not an optimised function, but it works. Don't wake up sleeping giants. 
-	public int put(TTTRecord record) throws DuplicatedKeyException{
+
+	// The put() method takes the record as an input and inserts that record
+	// into the hashtable. If that record is already there, it will throw a
+	// DuplicateKeyException.
+	/**
+	 * @param record
+	 * @return
+	 * @throws DuplicatedKeyException
+	 */
+	public int put(TTTRecord record) throws DuplicatedKeyException {
+
 		index = hashfunction(record.getConfiguration());
 		Hashnode.setElement(record);
-		if (hashtable[index].isEmpty()){
+		if (hashtable[index].isEmpty()) {
 			hashtable[index].insertLast(Hashnode);
-			configArray[index] = record.getConfiguration();
+			addConfig(record.getConfiguration());
 			return 0;
 		} else {
-			if (searchArray(record.getConfiguration(), configArray)){
+			if (searchArray(record.getConfiguration(), configArray)) {
 				throw new DuplicatedKeyException(record.getConfiguration());
 			}
 			hashtable[index].insertLast(Hashnode);
-			configArray[index] = record.getConfiguration();
+			addConfig(record.getConfiguration());
 			return 1;
 		}
-		
-//		for (int i = 0; i < hashtable.length; i++){
-//			if (index == i){
-//				if (hashtable[i].isEmpty()){
-//					hashtable[i].insertLast(Hashnode);
-//					configArray[i] = record.getConfiguration();
-//					return 0;
-//				} else {
-//					if (searchArray(record.getConfiguration(), configArray)){
-//						throw new DuplicatedKeyException(record.getConfiguration());
-//					} 
-//					hashtable[i].insertLast(Hashnode);
-//					configArray[i] = record.getConfiguration();
-//					return 1;
-//				}
-//			}
-//		}
-//		return 1;
+
 	}
-	
-	public void remove(String config) throws InexistentKeyException{
+
+	// The remove() method takes a configuration as an input and removes that
+	// configuration from the hashtable. If that configuration does that not
+	// exist, it will throw an InexistentKeyException
+	/**
+	 * @param config
+	 * @throws InexistentKeyException
+	 */
+	public void remove(String config) throws InexistentKeyException {
 		index = hashfunction(config);
+
 		current = hashtable[index].head;
-		System.out.println("The configuration is " + config);
-//		System.out.println("Size of the linkedlist: " + hashtable[index].size());
-		if (!searchArray(config, configArray) || hashtable[index].isEmpty()){
-//			System.out.println("Key does not exist");
+
+		if (hashtable[index].isEmpty())
 			throw new InexistentKeyException(config);
+
+		if (current.getElement().getConfiguration().equals(config)) {
+			hashtable[index].remove(current.getElement());
+			return;
 		}
-		while (!(current.getElement().getConfiguration().equals(config))){
-			if (current.getNext() == null)
-				break;
+		while ((current.getNext() != null) && (current.getNext().getElement() != null)) {
+			if (current.getElement().getConfiguration().equals(config)) {
+				hashtable[index].remove(current.getElement());
+				return;
+			}
 			current = current.getNext();
-			
-		hashtable[index].remove(current.getElement());
-		
-//		if (hashtable[index].isEmpty()){
-//			System.out.println("Index No. " + index);
-//			System.out.println("The list is empty");
-//			throw new InexistentKeyException(config);
-//		} else {
-//			while (!(current.getElement().getConfiguration().equals(config))) {
-////				System.out.println(hashtable[index].current.getElement());
-////				if (current != null)
-////					System.out.println("Current != null");
-////				if (!(hashtable[index].current.getElement().equals(config)))
-////					System.out.println("The current element does not equal config");
-////				System.out.println("Come in here");
-//////				System.out.println(current.getElement().getConfiguration() + " " + config);
-////
-////				System.out.println(current.getElement().getConfiguration());
-//				if (current.getNext() == null)
-//					break;
-//				current = current.getNext();
-//			}
-////			System.out.println("-----------------------");
-////			System.out.println(current.getElement().getConfiguration());
-//			hashtable[index].remove(current.getElement());
-////			System.out.println("Removed");
-////			System.out.println(hashtable[index].size());
-		
 		}
-			// Complete this part
-		
+		if (current.getElement() == null && current.getNext() == null)
+			throw new InexistentKeyException(config);
+
 	}
-	
-	//This is not an optimised function, but it works. Don't wake up sleeping giants. 
+
+	// The get() method will take a configuration as an input and return the
+	// record of that configuration if it is in the hashtable
+	/**
+	 * @param config
+	 * @return
+	 */
 	public Object get(String config) {
-	
+
 		index = hashfunction(config);
-		int count = 0;
-		LinkedList templist = hashtable[index];
-		if (templist.isEmpty()) {
+
+		current = hashtable[index].head;
+
+		if (current == null)
 			return null;
+
+		if (current.getElement().getConfiguration().equals(config))
+			return current.getElement();
+		while (!(current.getElement().getConfiguration().equals(config)) && (current.getNext() != null)) {
+			current = current.getNext();
 		}
-		while (!(templist.isEmpty()) && !(templist.head.getElement().equals(config))){
-			templist = hashtable[(index + count) % hashtable.length];
-			count++;
-		}
-		return templist;
-		
+		if (current.getElement() == null && current.getNext() == null)
+			return null;
+		return current.getElement();
 	}
-	public int numElements(){
+
+	// The numElements() method returns the number of elements in the hashtable
+	/**
+	 * @return
+	 */
+	public int numElements() {
 		return numElements;
 	}
 }
-

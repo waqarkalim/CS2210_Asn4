@@ -22,19 +22,11 @@ public class LinkedList<T> implements ListADT<T>
 		   head = node;
 		   node.setNext(null);
 	   } else {
-		   node = head.getNext();
+		   node.setNext(head.getNext());
 		   head = node;
 	   }
 	   count++;
 	   
-	   //	   head = node;
-//	   if (isEmpty()){
-//		   ;
-//	   } else {
-//		   node = head.getNext();
-//	   }
-//	   node = head.getNext();
-//	   head = node;
    }
    public void insertLast(LinearNode<T> node){
 	   current = head;
@@ -64,31 +56,12 @@ public class LinkedList<T> implements ListADT<T>
        count--;
 	   return current.getElement();
    }
-//   public T search(String targetElement) throws EmptyCollectionException{
-//	   
-//	   if (isEmpty())
-//		   throw new EmptyCollectionException("List");
-//	   
-//	   LinearNode<T> current = head;
-//	   
-//	   while (current != null){
-//		   System.out.println("Gets in here");
-//		   current = current.getNext();
-//		   System.out.println("Gets in here2");
-//		   System.out.println(current);
-//		   if (current.getElement().equals(targetElement)){
-//			   System.out.println("Gets in here3");
-//			   return current.getElement();
-//		   }
-//	   }
-//	   return null;
-//   }
-   
+
    public T remove (T targetElement) throws EmptyCollectionException, ElementNotFoundException 
    {
       if (isEmpty()){
-    	  System.out.println("Linkedlist is empty");
-    	  throw new EmptyCollectionException ("List");
+    	  System.out.println("EmptyCollectionException");
+    	  throw new EmptyCollectionException ("LinkedList");
       }
       
       boolean found = false;
@@ -141,18 +114,11 @@ public class LinkedList<T> implements ListADT<T>
    public boolean isEmpty()
    {
 	   return (head == null);
-//	   return (size() == 0);
    }
 
   
    public int size()
    {
-//	   int count = 0;
-//       while (current != null){
-//    	   count++;
-//    	   current = current.getNext();
-//       }
-//       return count;
 	   return count;
    }
    public String toString()
@@ -193,5 +159,4 @@ public Iterator<T> iterator() {
 	return null;
 }
 }
-
 

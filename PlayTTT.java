@@ -101,7 +101,7 @@ public class PlayTTT extends JFrame {
 		numBlocked = args.length - 3;
 		blocked = new int[numBlocked];
 		for (int i = 0; i < numBlocked; ++i) {
-			blocked[i] = Integer.parseInt(args[3 + i]);
+			blocked[i] = Integer.parseInt(args[3 + i]) - 1;
 			if ((blocked[i] < 0) || (blocked[i] >= size * size)) {
 				System.out.println("Invalid board position " + blocked[i]);
 				System.exit(0);
