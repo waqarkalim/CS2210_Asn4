@@ -185,31 +185,67 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 		}
 	}
 	
+//	public Pixel successor(BinaryNode r, Location key) {
+//		System.out.println("r : (" + r.getData().getLocation().xCoord() + ", " + r.getData().getLocation().yCoord() + ")");
+//		System.out.println("key: (" + key.xCoord() + ", " + key.yCoord() + ")");
+//		BinaryNode p = find(r, key);
+//		System.out.println("Find method returns something");
+//		System.out.println(p.getData().getColor());
+//		
+//		if (!p.isLeaf() && (!(p.getRight()).isLeaf())) {
+//			System.out.println("First if condition works");
+//			return (smallest(p.getRight()));
+//		} else {
+//			BinaryNode pprime = p.getParent();
+//			while ((pprime != null) && (pprime.getRight() == p)) {
+//				p = pprime;
+//				pprime = pprime.getParent();
+//			}
+//			if (pprime == null) {
+//				return null;
+//			} else {
+//				return p.getData();
+//			}
+//		}
+//	}
+	
 	public Pixel successor(BinaryNode r, Location key) {
-		System.out.println("r : (" + r.getData().getLocation().xCoord() + ", " + r.getData().getLocation().yCoord() + ")");
+		System.out.println("r  : (" + r.getData().getLocation().xCoord() + ", " + r.getData().getLocation().yCoord() + ")");
 		System.out.println("key: (" + key.xCoord() + ", " + key.yCoord() + ")");
-		BinaryNode p = find(r, key);
-		System.out.println("Find method returns something");
-		System.out.println(p.getData().getColor());
-		if (p == null) {
+		if (r.getData() == null) {
+			System.out.println("The data in r is NULL");
 			return null;
 		}
-		if (!p.isLeaf() && (!(p.getRight()).isLeaf())) {
-			System.out.println("First if condition works");
-			return (smallest(p.getRight()));
-		} else {
-			BinaryNode pprime = p.getParent();
-			while ((pprime != null) && (pprime.getRight() == p)) {
-				p = pprime;
-				pprime = pprime.getParent();
-			}
-			if (pprime == null) {
-				return null;
+		if (r.isLeaf()) {
+			System.out.println("r is a leaf node");
+//			return r.getData();
+			System.out.println("The compareTo value inside the isLeaf() condition is " + r.getData().getLocation().compareTo(key));
+			if (r.getData().getLocation().compareTo(key) == -1) {
+				return successor(r.getParent(), key);
 			} else {
-				return p.getData();
+				return r.getData();
+			}
+		} 
+		if (r.getData().getLocation().compareTo(key) <= 0) {
+			System.out.println("compareTo value is -1 or 0");
+			if (r.getRight() != null){
+				System.out.println("The right child is not NULL");
+				return successor(r.getRight(), key);
+			} else {
+				System.out.println("The right child is NULL");
+				return null;
+			}
+		} else {
+			System.out.println("compareTo value is 1");
+			if (r.getLeft() != null) {
+				System.out.println("The left child is not NULL");
+				return successor(r.getLeft(), key);
+			} else {
+				System.out.println("The left child is NULL");
+				return null;
 			}
 		}
-	}
+	}	
 	
 //	public Pixel successor(BinaryNode r, Location key) {
 //		System.out.println("Work till here");
