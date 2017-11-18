@@ -56,8 +56,32 @@ public class GraphicalObject implements GraphicalObjectADT {
 		BinarySearchTree thisTree = this.getTree();
 		BinarySearchTree otherTree = gobj.getTree();
 		
-		Location thisSmallestLocation = thisTree.smallest(thisTree.getRoot()).getLocation();
-		Location otherSmallestLocation = otherTree.smallest(otherTree.getRoot()).getLocation();
+		BinaryNode thisroot = thisTree.getRoot();
+		BinaryNode otherroot = otherTree.getRoot();
+		
+		Location thisSmallestLocation = thisTree.smallest(thisroot).getLocation();
+		Location otherSmallestLocation = otherTree.smallest(otherroot).getLocation();
+		
+		Location thisLargestLocation = thisTree.largest(thisroot).getLocation();
+		Location otherLargestLocation = otherTree.largest(otherroot).getLocation();
+		
+		while ((thisSmallestLocation != null) && (otherSmallestLocation != null)) {
+			if ((thisSmallestLocation.compareTo(thisLargestLocation) == 0) || (otherSmallestLocation.compareTo(otherLargestLocation) == 0)) {
+				return false;
+			}
+			
+			Location otherOffSet = new Location(otherSmallestLocation.xCoord() + gobj.getOffset().xCoord(), otherSmallestLocation.yCoord() + gobj.getOffset().yCoord());
+			Location thisOffSet = new Location(thisSmallestLocation.xCoord() + this.getOffset().xCoord(), thisSmallestLocation.yCoord() + this.getOffset().yCoord());
+			
+			if (thisOffSet.compareTo(otherOffSet) == 0) {
+				return true;
+			} else if (thisOffSet.compareTo(otherOffSet) == 1) {
+				otherSmallestLocation = otherTree.successor(otherroot, otherSmallestLocation).getLocation();
+			} else {
+				thisSmallestLocation = thisTree.successor(thisroot, thisSmallestLocation).getLocation();
+			}
+		}
+		return false;
 	}
 	
 	private boolean findPixel(Location p) {
