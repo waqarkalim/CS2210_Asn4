@@ -6,25 +6,6 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 	public BinarySearchTree() {
 		this.root = null;
 	}
-
-//	public Pixel get(BinaryNode r, Location key) {
-//		boolean found = false;
-//		System.out.println("r  : (" + r.getData().getLocation().xCoord() + ", " + r.getData().getLocation().yCoord() + ")");
-//		while (r.getData() != null) {
-//			System.out.println("r  : (" + r.getData().getLocation().xCoord() + ", " + r.getData().getLocation().yCoord() + ")");
-//			System.out.println("key: (" + key.xCoord() + ", " + key.yCoord() + ")");
-//			if (r.getData().getLocation().compareTo(key) == 0) {
-//				found = true;
-//				return r.getData();
-//			} else if (r.getData().getLocation().compareTo(key) == 1) {
-//				r = r.getLeft();
-//			} else {
-//				r = r.getRight();
-//			}
-//		}
-//		return found ? r.getData() : null;
-////		return find(r, key).getData();
-//	}
 	
 	public Pixel get(BinaryNode r, Location key) {
 		if (find(r, key) == null) {
@@ -33,44 +14,11 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 			return find(r, key).getData();
 		}
 	}
-	
-//	public Pixel get(BinaryNode r, Location key) {
-//
-//		if (size > 1) {
-//			if (r.getData().getLocation().compareTo(key) == 0) {
-//				if (r.isLeaf()) {
-//					System.out.println("The value of the leaf is (" + key.xCoord() + ", " + key.yCoord() + ") , "
-//							+ r.getData().getColor());
-//					return r.getData();
-//				}
-//				System.out.println(key + ", " + r.getData().getColor());
-//				return (new Pixel(key, r.getData().getColor()));
-//			}
-//
-//			else if (r.getData().getLocation().compareTo(key) == -1) {
-//				System.out.println("compareTo gives -1");
-//				get(r.getRight(), key);
-//			}
-//
-//			else if (r.getData().getLocation().compareTo(key) == 1) {
-//				System.out.println("compareTo gives 1 and the key is (" + key.xCoord() + ", " + key.yCoord() + ")");
-//				get(r.getLeft(), key);
-//			}
-//			System.out.println("Going to return null");
-//			return null;
-//		}
-//
-//		if (r.getData().getLocation().compareTo(key) == 0) {
-//			return r.getData();
-//		}
-//		return null;
-//	}
 
 	public void put(BinaryNode r, Pixel data) throws DuplicatedKeyException {
 
 		if (size == 0) { // BST is empty, so just make r the root of the tree,
 							// what could possibly go wrong? :')
-//			System.out.println("The tree is empty and one thing is being put into it");
 			root = new BinaryNode(data, null, null, r);
 			size++;
 			return;
@@ -101,87 +49,6 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 			}
 		}
 	}
-
-	// public void remove(BinaryNode r, Location key) throws InexistentKeyException
-	// {
-	//
-	// BinaryNode p = find(r, key);
-	//
-	// if (p.isLeaf()) {
-	// throw new InexistentKeyException(null);
-	// } else {
-	// if ((p.getLeft()).isLeaf()) {
-	// if (p == root) {
-	// BinaryNode cprime = p.getRight();
-	// root = cprime;
-	// cprime.setParent(null);
-	// } else {
-	// BinaryNode cprime = p.getRight();
-	// p.getParent().setRight(cprime);
-	// cprime.setParent(p.getParent());
-	// }
-	// } else if ((p.getRight().isLeaf())) {
-	// if (p == root) {
-	// BinaryNode cprime = p.getLeft();
-	// root = cprime;
-	// cprime.setParent(null);
-	// } else {
-	// BinaryNode cprime = p.getLeft();
-	// p.getParent().setLeft(cprime);
-	// cprime.setParent(p.getParent());
-	// }
-	// } else {
-	// BinaryNode s = smallestnode(p.getRight());
-	// p.setData(new Pixel(s.getData().getLocation(), s.getData().getColor()));
-	// (s.getRight()).setParent(s.getParent());
-	// }
-	// }
-	//
-	// }
-
-	// public void remove(BinaryNode r, Location key) throws InexistentKeyException
-	// {
-	// System.out.println("Remove starts");
-	// if (find(r, key).isLeaf()) {
-	// System.out.println("Throws an InexistentKeyException1");
-	// throw new InexistentKeyException(null);
-	// }
-	// System.out.println("(" + r.getData().getLocation().xCoord() + ", " +
-	// r.getData().getLocation().yCoord() + ")");
-	// System.out.println("Remove starts 1");
-	// if (r.getData().getLocation().compareTo(key) == 0) {
-	// System.out.println("The compareTo value is 0");
-	// if (r.getParent().getData().getLocation().compareTo(key) == -1) {
-	// System.out.println("The parent node's compareTo value is -1");
-	// r.getParent().setRight(null);
-	// size--;
-	// return;
-	// }
-	//
-	// if (r.getParent().getData().getLocation().compareTo(key) == 1) {
-	// System.out.println("The parent node's compareTo value is 1");
-	// r.getParent().setLeft(null);
-	// System.out.println("The right child of parent is removed");
-	// size--;
-	// return;
-	// }
-	// }
-	//
-	// else if (r.getData().getLocation().compareTo(key) == -1) {
-	// System.out.println("The compareTo value is -1");
-	// remove(r.getLeft(), key);
-	// return;
-	// }
-	//
-	// else if (r.getData().getLocation().compareTo(key) == 1) {
-	// System.out.println("The compareTo value is 1");
-	// remove(r.getRight(), key);
-	// return;
-	// }
-	//
-	// System.out.println("Throws an InexistentKeyException");
-	// throw new InexistentKeyException(null);
-	// }
 
 	// GOOD REMOVE FUNCTION BELOW
 //	public void remove(BinaryNode r, Location key) throws InexistentKeyException {
@@ -218,159 +85,128 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 //		}
 //	}
 	
-//	public void remove(BinaryNode r, Location key) {
-//		if (r.getData().getLocation().compareTo(key) == 1) {
-//			remove(r.getLeft(), key);
-//		} else if (r.getData().getLocation().compareTo(key) == -1) {
-//			remove(r.getRight(), key);
-//		} else {
-//			if (r.isLeaf()) {
-//				if (r == (r.getParent()).getLeft()) {
-//					r.getParent().setLeft(null);
-//				} else {
-//					r.getParent().setRight(null);
-//				}
-//				size--;
-//				return;
-//			} else {
-//				System.out.println("Get till here");
-//				BinaryNode successor = successorNode(r, key);
-//				successor.setLeft(r.getLeft());
-//				successor.setRight(r.getRight());
-//				successor.setParent(r.getParent());
-//				(successor.getParent()).setRight(null);
-//				size--;
-//				return;
-//			}
-//		}
-//	}
 	
 	public void remove(BinaryNode r, Location key) throws InexistentKeyException {
-		System.out.println(r + ", " + r.getParent());
-		if (r.isLeaf() && (r.getData().getLocation().xCoord() != key.xCoord()) && (r.getData().getLocation().yCoord() != key.yCoord())) {
-			System.out.println("Throwing an inexistent key exception");
-			throw new InexistentKeyException(null);
-		}
-		if (size == 1) {
-			System.out.println("Removing root as that is the only node in tree");
+		BinaryNode p = find(r, key);
+		
+		if (root.equals(p)) {
 			r = null;
 			size--;
 			return;
 		}
 		
-		if (r.getData().getLocation().compareTo(key) == 1) {
-			System.out.println("The compareTo value is 1, move left");
-			remove(r.getLeft(), key);
-		} else if (r.getData().getLocation().compareTo(key) == -1) {
-			System.out.println("The compareTo value is -1, move right");
-			remove(r.getRight(), key);
+		if (r.isLeaf() && (r.getData().getLocation().xCoord() != key.xCoord()) && (r.getData().getLocation().yCoord() != key.yCoord())) {
+			throw new InexistentKeyException(null);
 		} else {
-			if (!(r.isLeaf())) {
-				System.out.println("r is not a leaf");
-//				System.out.println(r.getParent());
-				System.out.println("(" + r.getParent().getData().getLocation().xCoord() + ", " + r.getParent().getData().getLocation().yCoord() + ")");
-				if (r.getParent().getData().getLocation().compareTo(key) == 1) {
-					System.out.println("r.parent compareTo value is 1");
-					BinaryNode predecessor = predecessorNode(r.getParent(), key);
-					(predecessor.getParent()).setRight(null);
-					predecessor.setLeft(r.getLeft());
-					predecessor.setRight(r.getRight());
-					(r.getParent()).setLeft(predecessor);
-					size--;
-					return;
-					
-				} else if (r.getParent().getData().getLocation().compareTo(key) == -1) {
-					System.out.println("r.parent compareTo value is -1");
-					BinaryNode successor = successorNode(r.getParent(), key);
-					(successor.getParent()).setLeft(null);
-					successor.setRight(r.getRight());
-					successor.setLeft(r.getLeft());
-					(r.getParent()).setRight(successor);
-					size--;
-					return;
-					
+			if ((p.getLeft() == null) && ((p.getRight() != null))) {
+				if (p.equals(r)) {
+					BinaryNode otherChild = p.getRight();
+					root = otherChild;
+					otherChild.setParent(null);
+				} else {
+					BinaryNode otherChild = p.getRight();
+					p.setParent(otherChild);
+					otherChild.setParent(p.getParent());
 				}
+				size--;
+				return;
+			} else if ((p.getRight() == null) && (p.getLeft() != null)) {
+				if (p.equals(r)) {
+					BinaryNode otherChild = p.getLeft();
+					root = otherChild;
+					otherChild.setParent(null);
+				} else {
+					BinaryNode otherChild = p.getLeft();
+					p.setParent(otherChild);
+					otherChild.setParent(p.getParent());
+				}
+				size--;
+				return;
 			} else {
-				System.out.println("r is a leaf");
-				if (r.getParent().getData().getLocation().compareTo(key) == 1) {
-					(r.getParent()).setLeft(null);
-					size--;
-					return;
-				} else if (r.getParent().getData().getLocation().compareTo(key) == -1) {
-					(r.getParent()).setRight(null);
-					size--;
-					return;
+				if ((p != null) && (p.getLeft() == null) && (p.getRight() == null)) {
+					if (r.getData().getLocation().compareTo(key) == 1) {
+						r.setLeft(null);
+						size--;
+						return;
+					} else if (r.getData().getLocation().compareTo(key) == -1) {
+						r.setRight(null);
+						size--;
+						return;
+					}
 				}
+				BinaryNode smallest = smallestNode(p.getRight());
+				p.setData(new Pixel(smallest.getData().getLocation(), smallest.getData().getColor()));
+				smallest.setParent((smallest.getRight()).getParent());
 			}
 		}
 	}
 	
 	
-//	public Pixel successor(BinaryNode r, Location key) {
-//		System.out.println("r : (" + r.getData().getLocation().xCoord() + ", " + r.getData().getLocation().yCoord() + ")");
-//		System.out.println("key: (" + key.xCoord() + ", " + key.yCoord() + ")");
-//		BinaryNode p = find(r, key);
-//		System.out.println("Find method returns something");
-//		System.out.println(p.getData().getColor());
+	// BEST REMOVE FUNCTION YET BELOW
+//	public void remove(BinaryNode r, Location key) throws InexistentKeyException {
+//		System.out.println(r + ", " + r.getParent());
+//		if (r.isLeaf() && (r.getData().getLocation().xCoord() != key.xCoord()) && (r.getData().getLocation().yCoord() != key.yCoord())) {
+//			System.out.println("Throwing an inexistent key exception");
+//			throw new InexistentKeyException(null);
+//		}
+//		if (size == 1) {
+//			System.out.println("Removing root as that is the only node in tree");
+//			r = null;
+//			size--;
+//			return;
+//		}
 //		
-//		if (!p.isLeaf() && (!(p.getRight()).isLeaf())) {
-//			System.out.println("First if condition works");
-//			return (smallest(p.getRight()));
+//		if (r.getData().getLocation().compareTo(key) == 1) {
+//			System.out.println("The compareTo value is 1, move left");
+//			remove(r.getLeft(), key);
+//		} else if (r.getData().getLocation().compareTo(key) == -1) {
+//			System.out.println("The compareTo value is -1, move right");
+//			remove(r.getRight(), key);
 //		} else {
-//			BinaryNode pprime = p.getParent();
-//			while ((pprime != null) && (pprime.getRight() == p)) {
-//				p = pprime;
-//				pprime = pprime.getParent();
-//			}
-//			if (pprime == null) {
-//				return null;
+//			if (!(r.isLeaf())) {
+//				System.out.println("r is not a leaf");
+////				System.out.println(r.getParent());
+//				System.out.println("(" + r.getParent().getData().getLocation().xCoord() + ", " + r.getParent().getData().getLocation().yCoord() + ")");
+//				if (r.getParent().getData().getLocation().compareTo(key) == 1) {
+//					System.out.println("r.parent compareTo value is 1");
+//					BinaryNode predecessor = predecessorNode(r.getParent(), key);
+//					(predecessor.getParent()).setRight(null);
+//					predecessor.setLeft(r.getLeft());
+//					predecessor.setRight(r.getRight());
+//					(r.getParent()).setLeft(predecessor);
+//					size--;
+//					return;
+//					
+//				} else if (r.getParent().getData().getLocation().compareTo(key) == -1) {
+//					System.out.println("r.parent compareTo value is -1");
+//					BinaryNode successor = successorNode(r.getParent(), key);
+//					(successor.getParent()).setLeft(null);
+//					successor.setRight(r.getRight());
+//					successor.setLeft(r.getLeft());
+//					(r.getParent()).setRight(successor);
+//					size--;
+//					return;
+//					
+//				}
 //			} else {
-//				return p.getData();
+//				System.out.println("r is a leaf");
+//				if (r.getParent().getData().getLocation().compareTo(key) == 1) {
+//					(r.getParent()).setLeft(null);
+//					size--;
+//					return;
+//				} else if (r.getParent().getData().getLocation().compareTo(key) == -1) {
+//					(r.getParent()).setRight(null);
+//					size--;
+//					return;
+//				}
 //			}
 //		}
 //	}
 	
-//	public Pixel successor(BinaryNode r, Location key) {
-//		System.out.println("r  : (" + r.getData().getLocation().xCoord() + ", " + r.getData().getLocation().yCoord() + ")");
-//		System.out.println("key: (" + key.xCoord() + ", " + key.yCoord() + ")");
-//		BinaryNode p = find(r, key);
-//		System.out.println("p  : (" + p.getData().getLocation().xCoord() + ", " + p.getData().getLocation().yCoord() + ")");
-//		if (r.getData() == null) {
-//			System.out.println("The data in r is NULL");
-//			return null;
-//		}
-//		if (p.isLeaf() && (p == p.getParent().getLeft())) {
-//			return p.getParent().getData();
-//		}
-////		if (p.isLeaf() && (p == p.getParent().getRight())) {
-////			System.out.println("p is a leaf node");
-////			System.out.println("The compareTo value inside the isLeaf() condition is " + r.getData().getLocation().compareTo(new Location(2, 3)));
-////			return successor(p.getParent(), key)
-////		} 
-//		if (r.getData().getLocation().compareTo(key) <= 0) {
-//			System.out.println("compareTo value is -1 or 0");
-//			if (r.getRight() != null){
-//				System.out.println("The right child is not NULL");
-//				return successor(r.getRight(), key);
-//			} else {
-//				System.out.println("The right child is NULL");
-//				return null;
-//			}
-//		} else {
-//			System.out.println("compareTo value is 1");
-//			if (r.getLeft() != null) {
-//				System.out.println("The left child is not NULL");
-//				return successor(r.getLeft(), key);
-//			} else {
-//				System.out.println("The left child is NULL");
-//				return null;
-//			}
-//		}
-//	}	
-	
+
 	public Pixel successor(BinaryNode r, Location key) {
 //		System.out.println(r);
-		if (r == null) {
+		if ((r == null)) {
 			return null;
 		} 
 		if (r.getData().getLocation().compareTo(key) <= 0) {
@@ -387,7 +223,7 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 	}
 	
 	public BinaryNode successorNode(BinaryNode r, Location key) {
-		if (r == null) {
+		if ((r == null)) {
 			return null;
 		} 
 		if (r.getData().getLocation().compareTo(key) <= 0) {
@@ -403,24 +239,8 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 		
 	}
 	
-	
-//	public Pixel successor(BinaryNode r, Location key) {
-//		System.out.println("Work till here");
-//		BinaryNode p = find(r, key);
-//		if (p == null) {
-//			return null;
-//		}
-//		System.out.println("Work till here1");
-//		System.out.println(p);
-//		System.out.println(p.getRight());
-//		Pixel s = smallest(p.getRight());
-//		System.out.println("Work till here2");
-//		return s;
-//		
-//	}
-	
 	public Pixel predecessor(BinaryNode r, Location key) {
-		if (r == null) {
+		if ((r == null)) {
 			return null;
 		} 
 		if (r.getData().getLocation().compareTo(key) >= 0) {
@@ -438,7 +258,7 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 	}
 	
 	public BinaryNode predecessorNode(BinaryNode r, Location key) {
-		if (r == null) {
+		if ((r == null)) {
 			return null;
 		} 
 		if (r.getData().getLocation().compareTo(key) >= 0) {
@@ -455,24 +275,6 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 		
 	}
 
-//	public Pixel smallest(BinaryNode r) throws EmptyTreeException {
-//		System.out.println("Enter the smallest() method");
-//		if (size == 0) {
-//			throw new EmptyTreeException();
-//		}
-//		if (r.isLeaf()) {
-//
-//			if (r.getData() != null) {
-//				return r.getData();
-//			}
-//			System.out.println("Throwing an EmptyTreeException");
-//		} else {
-//			return smallest(r.getLeft());
-//		}
-//
-//		return null;
-//	}
-
 	public Pixel smallest(BinaryNode r) throws EmptyTreeException {
 		
 		if (r != null) {
@@ -486,36 +288,19 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 		
 	}
 	
-//	public DictEntry smallest() {
-//		TreeNode r=root;
-//		if (r!=null){
-//			//loop through the left keys until the last left key
-//
-//			while(r.getLeft().getKey()!=null){
-//				r=r.getLeft();
-//			}
-//
-//			return r.getKey();
-//		}
-//		else
-//			return null;
-//	}
-	
-//	public Pixel largest(BinaryNode r) throws EmptyTreeException {
-//		if (r.isLeaf()) {
-//
-//			if (r.getData() != null) {
-//				return r.getData();
-//			}
-//
-//			throw new EmptyTreeException();
-//		} else {
-//			largest(r.getRight());
-//		}
-//
-//		return null;
-//	}
-	
+public BinaryNode smallestNode(BinaryNode r) throws EmptyTreeException {
+		
+		if (r != null) {
+			while (r.getLeft() != null) {
+				r = r.getLeft();
+			}
+			return r;
+		} else {
+			return null;
+		}
+		
+	}
+
 	public Pixel largest(BinaryNode r) throws EmptyTreeException {
 		
 		if (r != null) {
@@ -533,44 +318,6 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 	public BinaryNode getRoot() {
 		return this.root;
 	}
-
-//	private BinaryNode find(BinaryNode r, Location key) {
-//
-//		if (size > 1) {
-//			if (r.getData().getLocation().compareTo(key) == 0) {
-//				if (r.isLeaf()) {
-//					System.out.println("The value of the leaf is (" + key.xCoord() + ", " + key.yCoord() + ") , "
-//							+ r.getData().getColor());
-//					return r;
-//				}
-//				System.out.println(key + ", " + r.getData().getColor());
-//				return (new BinaryNode(new Pixel(key, r.getData().getColor()), r.getLeft(), r.getRight(),
-//						r.getParent()));
-//			}
-//
-//			else if (r.getData().getLocation().compareTo(key) == -1) {
-//				System.out.println("compareTo gives -1");
-//				find(r.getRight(), key);
-//			}
-//
-//			else if (r.getData().getLocation().compareTo(key) == 1) {
-//				System.out.println("compareTo gives 1 and the key is (" + key.xCoord() + ", " + key.yCoord() + ")");
-//				find(r.getLeft(), key);
-//			}
-//			System.out.println("Going to return null");
-//			return null;
-//		}
-//		System.out.println("Size is " + size);
-//		if (size == 0){
-//			return null;
-//		} else {
-//			return r;
-//		}
-////		if (r.getData().getLocation().compareTo(key) == 0) {
-////			return r;
-////		}
-////		return null;
-//	}
 	
 	public BinaryNode find(BinaryNode r, Location key) {
 		boolean found = false;
@@ -589,6 +336,6 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 		}
 		return r;
 	}
-	
-	
 }
+	
+	
